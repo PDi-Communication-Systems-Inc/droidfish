@@ -20,11 +20,6 @@ import android.graphics.drawable.StateListDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DimenRes;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.IntDef;
-import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -39,16 +34,10 @@ public class FloatingActionButton extends ImageButton {
   public static final int SIZE_NORMAL = 0;
   public static final int SIZE_MINI = 1;
 
-  @Retention(RetentionPolicy.SOURCE)
-  @IntDef({ SIZE_NORMAL, SIZE_MINI })
-  public @interface FAB_SIZE {
-  }
-
   int mColorNormal;
   int mColorPressed;
   int mColorDisabled;
   String mTitle;
-  @DrawableRes
   private int mIcon;
   private Drawable mIconDrawable;
   private int mSize;
@@ -100,11 +89,7 @@ public class FloatingActionButton extends ImageButton {
     mCircleSize = getDimension(mSize == SIZE_NORMAL ? R.dimen.fab_size_normal : R.dimen.fab_size_mini);
   }
 
-  public void setSize(@FAB_SIZE int size) {
-    if (size != SIZE_MINI && size != SIZE_NORMAL) {
-      throw new IllegalArgumentException("Use @FAB_SIZE constants only!");
-    }
-
+  public void setSize(int size) {
     if (mSize != size) {
       mSize = size;
       updateCircleSize();
@@ -113,12 +98,11 @@ public class FloatingActionButton extends ImageButton {
     }
   }
 
-  @FAB_SIZE
   public int getSize() {
     return mSize;
   }
 
-  public void setIcon(@DrawableRes int icon) {
+  public void setIcon(int icon) {
     if (mIcon != icon) {
       mIcon = icon;
       mIconDrawable = null;
@@ -126,7 +110,7 @@ public class FloatingActionButton extends ImageButton {
     }
   }
 
-  public void setIconDrawable(@NonNull Drawable iconDrawable) {
+  public void setIconDrawable(Drawable iconDrawable) {
     if (mIconDrawable != iconDrawable) {
       mIcon = 0;
       mIconDrawable = iconDrawable;
@@ -141,7 +125,7 @@ public class FloatingActionButton extends ImageButton {
     return mColorNormal;
   }
 
-  public void setColorNormalResId(@ColorRes int colorNormal) {
+  public void setColorNormalResId(int colorNormal) {
     setColorNormal(getColor(colorNormal));
   }
 
@@ -159,7 +143,7 @@ public class FloatingActionButton extends ImageButton {
     return mColorPressed;
   }
 
-  public void setColorPressedResId(@ColorRes int colorPressed) {
+  public void setColorPressedResId(int colorPressed) {
     setColorPressed(getColor(colorPressed));
   }
 
@@ -177,7 +161,7 @@ public class FloatingActionButton extends ImageButton {
     return mColorDisabled;
   }
 
-  public void setColorDisabledResId(@ColorRes int colorDisabled) {
+  public void setColorDisabledResId(int colorDisabled) {
     setColorDisabled(getColor(colorDisabled));
   }
 
@@ -199,11 +183,11 @@ public class FloatingActionButton extends ImageButton {
     return mStrokeVisible;
   }
 
-  int getColor(@ColorRes int id) {
+  int getColor(int id) {
     return getResources().getColor(id);
   }
 
-  float getDimension(@DimenRes int id) {
+  float getDimension(int id) {
     return getResources().getDimension(id);
   }
 

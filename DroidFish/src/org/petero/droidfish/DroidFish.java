@@ -147,8 +147,7 @@ import android.widget.Toast;
 
 @SuppressLint("ClickableViewAccessibility")
 public class DroidFish extends Activity
-                       implements GUIInterface,
-                                  ActivityCompat.OnRequestPermissionsResultCallback {
+                       implements GUIInterface {
     // FIXME!!! PGN view option: game continuation (for training)
     // FIXME!!! Remove invalid playerActions in PGN import (should be done in verifyChildren)
     // FIXME!!! Implement bookmark mechanism for positions in pgn files
@@ -598,19 +597,11 @@ public class DroidFish extends Activity
 
     /** Create directory structure on SD card. */
     private final void createDirectories() {
-        if (storagePermission == PermissionState.UNKNOWN) {
-            String extStorage = Manifest.permission.WRITE_EXTERNAL_STORAGE;
-            if (ContextCompat.checkSelfPermission(this, extStorage) == 
-                    PackageManager.PERMISSION_GRANTED) {
-                storagePermission = PermissionState.GRANTED;
-            } else {
-                ActivityCompat.requestPermissions(this, new String[]{extStorage}, 0);
-                storagePermission = PermissionState.REQUESTED;
-            }
-        }
-        if (storagePermission != PermissionState.GRANTED)
-            return;
 
+        /* hack for not having access to an sdk with api 23 backport support to 
+           sdk in our Jellybean or Lollipop development trees */    
+        storagePermission = PermissionState.GRANTED;
+ 
         File extDir = Environment.getExternalStorageDirectory();
         String sep = File.separator;
         new File(extDir + sep + bookDir).mkdirs();
@@ -620,17 +611,7 @@ public class DroidFish extends Activity
         new File(extDir + sep + engineDir + sep + EngineUtil.openExchangeDir).mkdirs();
         new File(extDir + sep + gtbDefaultDir).mkdirs();
         new File(extDir + sep + rtbDefaultDir).mkdirs();
-    }
 
-    @Override
-    public void onRequestPermissionsResult(int code, String[] permissions, int[] results) {
-        if (storagePermission == PermissionState.REQUESTED) {
-            if ((results.length > 0) && (results[0] == PackageManager.PERMISSION_GRANTED))
-                storagePermission = PermissionState.GRANTED;
-            else
-                storagePermission = PermissionState.DENIED;
-        }
-        createDirectories();
     }
 
     /** Return true if the WRITE_EXTERNAL_STORAGE permission has been granted. */
