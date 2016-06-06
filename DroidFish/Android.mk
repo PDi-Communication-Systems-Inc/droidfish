@@ -72,8 +72,8 @@ LOCAL_CFLAGS    := \
 	-I $(LOCAL_PATH)/jni/gtb/sysport/ -I $(LOCAL_PATH)/jni/gtb/compression/ \
 	-I $(LOCAL_PATH)/jni/gtb/compression/liblzf/ -I $(LOCAL_PATH)/jni/gtb/compression/zlib/ \
 	-I $(LOCAL_PATH)/jni/gtb/compression/lzma/ -I $(LOCAL_PATH)/jni/gtb/compression/huffman/ \
-	-D Z_PREFIX -D NDEBUG -Wall\
-	 -mandroid -DTARGET_OS=android -D__ANDROID__
+	-D Z_PREFIX -D NDEBUG -Wall -g \
+	 -mandroid -DTARGET_OS=android -D__ANDROID__ 
 
 include $(BUILD_SHARED_LIBRARY)
 

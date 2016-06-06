@@ -233,9 +233,9 @@ public class Evaluate {
     /** Constructor. */
     public Evaluate() {
         if (kpkTable == null)
-            kpkTable = readTable("/kpk.bitbase", 2*32*64*48/8);
+            kpkTable = readTable("/assets/kpk.bitbase", 2*32*64*48/8);
         if (krkpTable == null)
-            krkpTable = readTable("/krkp.winmasks", 2*32*48*8);
+            krkpTable = readTable("/assets/krkp.winmasks", 2*32*48*8);
     }
 
     private byte[] readTable(String resource, int length) {

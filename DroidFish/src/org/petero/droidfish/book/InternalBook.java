@@ -85,7 +85,7 @@ final class InternalBook implements IOpeningBook {
         bookMap = new HashMap<Long, ArrayList<BookEntry>>();
         numBookMoves = 0;
         try {
-            InputStream inStream = getClass().getResourceAsStream("/book.bin");
+            InputStream inStream = getClass().getResourceAsStream("/assets/book.bin");
             if (inStream == null)
                 throw new IOException();
             List<Byte> buf = new ArrayList<Byte>(8192);

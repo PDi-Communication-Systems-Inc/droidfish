@@ -62,7 +62,7 @@ public class Book {
         rndGen.setSeed(System.currentTimeMillis());
         numBookMoves = 0;
         try {
-            InputStream inStream = getClass().getResourceAsStream("/book.bin");
+            InputStream inStream = getClass().getResourceAsStream("/assets/book.bin");
             List<Byte> buf = new ArrayList<Byte>(8192);
             byte[] tmpBuf = new byte[1024];
             while (true) {
@@ -189,7 +189,7 @@ public class Book {
     /** Creates the book.bin file. */
     public static void main(String[] args) throws IOException {
         List<Byte> binBook = createBinBook();
-        FileOutputStream out = new FileOutputStream("../src/book.bin");
+        FileOutputStream out = new FileOutputStream("/assets/book.bin");
         int bookLen = binBook.size();
         byte[] binBookA = new byte[bookLen];
         for (int i = 0; i < bookLen; i++)
