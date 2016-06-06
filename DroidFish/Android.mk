@@ -77,6 +77,17 @@ LOCAL_CFLAGS    := \
 
 include $(BUILD_SHARED_LIBRARY)
 
+include $(CLEAR_VARS)
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE := librtb.so
+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+LOCAL_MODULE_PATH  := $(TARGET_OUT_SHARED_LIBRARIES)
+LOCAL_SRC_FILES := lib/$(LOCAL_MODULE)
+
+include $(BUILD_PREBUILT)
+
+# Note not possible to include a full featured c++ stl until marshmallow w/in AOSP build system
+# unless I can come with another way to link a prebuilt lib and point to a set of header files
 #include $(CLEAR_VARS)
 
 #LOCAL_MODULE    := librtb
@@ -84,7 +95,7 @@ include $(BUILD_SHARED_LIBRARY)
 	jni/rtb/bitBoard.cpp jni/rtb/material.cpp jni/rtb/moveGen.cpp jni/rtb/position.cpp jni/rtb/rtb-probe.cpp jni/rtb/tbprobe.cpp \
 	jni/rtb/RtbProbe.cpp
 
-#include external/libcxx/libcxx.mk
+#LOCAL_NDK_STL_VARIANT := stlport_shared
 #LOCAL_CFLAGS    := --std=c++11 \
 	-I $(LOCAL_PATH)/jni/rtb/sysport/ -I -DNDEBUG -Wall \
 	 -mandroid -DTARGET_OS=android -D__ANDROID__ \
